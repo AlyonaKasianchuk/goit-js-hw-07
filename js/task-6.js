@@ -16,21 +16,25 @@ btnDestroy.addEventListener("click", destroyBox);
 
 function createBox(event) {
   const inputValue = inputNumber.value;
-  if (inputValue < 100) {
-    console.log("the number must be greater than 100");
+  if (inputValue < 1 || inputValue > 100) {
+    console.log(
+      "the number must be greater than 0 and less than or equal to 100"
+    );
     return;
   }
   let boxSize = 30;
+  let fragment = document.createDocumentFragment();
 
   for (let i = 0; i < inputValue; i++) {
     const box = document.createElement("div");
     box.style.width = `${boxSize}px`;
     box.style.height = `${boxSize}px`;
     box.style.backgroundColor = getRandomHexColor();
-    boxArea.append(box);
+    fragment.append(box);
     boxSize += 10;
   }
-  inputValue = "";
+  boxArea.append(fragment);
+  inputNumber.value = "";
 }
 
 function destroyBox(event) {
